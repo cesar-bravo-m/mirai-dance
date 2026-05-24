@@ -1,0 +1,15 @@
+{
+    "background_animation": "https://miraidancevideos.blob.core.windows.net/demovideos/background_animation.mp4?sp=r&st=2026-05-23T22:45:25Z&se=2026-05-30T07:00:25Z&spr=https&sv=2026-02-06&sr=b&sig=eVEcLkhIg0F2zzL9Wp1GI%2B87g25nj2vz%2BJ9y1rpJ8%2Bs%3D",
+    "sounds": {
+        "applause": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/applause.mp3?sp=r&st=2026-05-24T15:46:08Z&se=2026-05-31T00:01:08Z&spr=https&sv=2026-02-06&sr=b&sig=C%2B2D%2FvTolJB25BOg3GHplgh4BcODqOuDNzLvGABNw4Y%3D",
+        "menumusic": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/menumusic.mp3?sp=r&st=2026-05-24T15:46:23Z&se=2026-05-31T00:01:23Z&spr=https&sv=2026-02-06&sr=b&sig=OaSpB4YSrD%2FG3U47A%2BJVVfYN%2Bq401wTyUVLs3aZlbEI%3D",
+        "scratch_sound": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/scratch_sound.mp3?sp=r&st=2026-05-24T15:46:37Z&se=2026-05-31T00:01:37Z&spr=https&sv=2026-02-06&sr=b&sig=wSJv7DiV518GNBkiG0AFc63WatfBK%2FvzxHaWkIKnRv8%3D",
+        "song_selected": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/song_selected.mp3?sp=r&st=2026-05-24T15:46:49Z&se=2026-05-31T00:01:49Z&spr=https&sv=2026-02-06&sr=b&sig=NIAFiaibJwEyzuXdqzk8ceJUCsLiMjECvJfTWtVWEXA%3D",
+        "special": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/special.mp3?sp=r&st=2026-05-24T15:47:02Z&se=2026-05-31T00:02:02Z&spr=https&sv=2026-02-06&sr=b&sig=jUqOj%2F0ShPk0k0GkADirh47dtYbaGN2N0QZEsP9vCCg%3D"
+    },
+    "logos": {
+        "jpop": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/jpop.png?sp=r&st=2026-05-24T15:47:52Z&se=2026-05-31T00:02:52Z&spr=https&sv=2026-02-06&sr=b&sig=ydvUIsjKr%2FbHBVyeqM9BOTPP9Is%2Bq5WBqtZxNpR90PI%3D",
+        "kpop": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/kpop.png?sp=r&st=2026-05-24T15:48:22Z&se=2026-05-31T00:03:22Z&spr=https&sv=2026-02-06&sr=b&sig=FO2u4WNuWf%2B3SlR8UEk025BlMvS3ca8v5MfRjeRRZAo%3D",
+        "metal": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/metal.png?sp=r&st=2026-05-24T15:48:37Z&se=2026-05-31T00:03:37Z&spr=https&sv=2026-02-06&sr=b&sig=QyFEqh8867Al1Kp54SGDqLMrv%2B%2Bjkj4K0dm1O0ndwA0%3D"
+    }
+}

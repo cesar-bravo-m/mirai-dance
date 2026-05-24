@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+    image: mirai-dance
+    container_name: mirai-dance
+    restart: unless-stopped
+    ports:
+      - "80:80"

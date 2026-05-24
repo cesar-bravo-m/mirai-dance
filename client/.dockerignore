@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.gitignore
+.env
+.env.*
+*.log
+.vite
+
+# Dev-only MediaPipe assets; prod loads these from the Azure blob.
+public/mediapipe
+.claude
+Dockerfile
+docker-compose.yml
+.dockerignore
