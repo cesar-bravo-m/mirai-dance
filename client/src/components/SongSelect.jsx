@@ -27,14 +27,18 @@ const SONG_ENTRIES = Object.entries(SONGS).map(([title, urls]) => {
     genre: urls.Genre,
     artist: urls.Artist,
     difficulty: urls.Difficulty,
+
     dancerImages: urls.Dancers,
   };
 });
 
 const SONG_COUNT = SONG_ENTRIES.length;
+
 const SAMPLE_VOLUME = 0.7;
 const FADE_MS = 220;
+
 const MIN_LOAD_DURATION_MS = 1800;
+
 const VISIBLE_SIDE_COUNT = 3;
 
 function wrapOffset(from, to, n) {
@@ -51,10 +55,11 @@ function playSfx(audio) {
   try {
     audio.currentTime = 0;
     audio.play().catch(() => {});
-  } catch { /* ignore */ }
+  } catch {  }
 }
 
 export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialTitle }) {
+
   const [selectedIndex, setSelectedIndex] = useState(() => {
     if (initialTitle) {
       const i = SONG_ENTRIES.findIndex(s => s.title === initialTitle);
@@ -62,6 +67,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
     }
     return 0;
   });
+
   const [lifetimeCal] = useState(() => {
     try {
       const v = parseFloat(
@@ -78,8 +84,8 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
   const activeAudioRef = useRef(null);
   const abortRef = useRef(null);
   const dancerResolverRef = useRef(null);
-  const selectedIndexRef = useRef(selectedIndex);
 
+  const selectedIndexRef = useRef(selectedIndex);
   useEffect(() => { selectedIndexRef.current = selectedIndex; }, [selectedIndex]);
 
   const inFlow = !!fetchingTitle || !!dancerPick || !!buffering;
@@ -101,7 +107,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
       window.removeEventListener('keydown', retryStart, opts);
       stopAll(assets);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   useEffect(() => {
@@ -129,6 +135,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
 
   function setSelected(idx) {
     if (inFlow) return;
+
     const wrapped = ((idx % SONG_COUNT) + SONG_COUNT) % SONG_COUNT;
     if (wrapped === selectedIndex) return;
     setSelectedIndex(wrapped);
@@ -193,11 +200,13 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
     onMenuMusicStop?.();
     playSfx(songSelectedSfx);
     setFetchingTitle(song.title);
+
     abortRef.current = new AbortController();
     const signal = abortRef.current.signal;
     const startedAt = performance.now();
 
     try {
+
       setBuffering({
         song,
         steps:    { received: 0, total: 0, ratio: 0 },
@@ -239,6 +248,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
         dancerIndex,
       });
     } catch (err) {
+
       abortRef.current?.abort();
       if (!isCancelled(err)) {
         console.error('Pre-load failed:', err);
@@ -253,11 +263,13 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
 
   return (
     <div className="select-screen">
+
       <div className="select-header">
         <div className="select-header-brand">MIRAI DANCE</div>
       </div>
 
       <div className="select-stage-area">
+
         <div className="carousel-wrap">
         <button
           type="button"
@@ -269,8 +281,10 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
 
         <div className="carousel-stage">
           {SONG_ENTRIES.map((song, i) => {
+
             const offset = wrapOffset(selectedIndex, i, SONG_COUNT);
             const absOffset = Math.abs(offset);
+
             if (absOffset > VISIBLE_SIDE_COUNT) return null;
 
             const isCenter = offset === 0;
@@ -305,6 +319,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
                 aria-current={isCenter ? 'true' : undefined}
                 tabIndex={0}
               >
+
                 <img
                   src={song.cover}
                   alt=""
@@ -360,12 +375,6 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
 
       </div>
 
-      {/* <div className="select-bottom">
-        <div className="select-hint">
-          <kbd>←</kbd> <kbd>→</kbd> Browse <span className="select-hint-sep">·</span> <kbd>Enter</kbd> Select
-        </div>
-      </div> */}
-
       <div className="select-calorie-readout">
         <div className="select-calorie-value">
           {lifetimeCal.toLocaleString()}
@@ -410,6 +419,7 @@ function DifficultyStars({ level }) {
 }
 
 const GENRE_LOGOS = REMOTE_ASSETS.logos;
+
 if (typeof window !== 'undefined') {
   Object.values(GENRE_LOGOS).forEach((src) => {
     const img = new Image();
@@ -420,6 +430,7 @@ function GenreLogo({ genre }) {
   const slug = genre.toLowerCase().replace(/\s+/g, '');
   const src = GENRE_LOGOS[slug];
   if (!src) return <>{genre}</>;
+
   return (
     <img
       key={src}
@@ -464,6 +475,7 @@ function DancerPickModal({ song, payload, onChoose, onCancel }) {
                 }
                 onClick={() => onChoose(i)}
               >
+
                 <div className="dancer-pick-lights" aria-hidden="true" />
                 {imgUrl ? (
                   <img
@@ -634,6 +646,7 @@ async function openCache() {
 }
 
 async function downloadBytes(url, signal, onProgress) {
+
   const cache = await openCache();
   if (cache) {
     const cached = await cache.match(url);
@@ -652,6 +665,8 @@ async function downloadBytes(url, signal, onProgress) {
     if (err?.name === 'AbortError') throw err;
     throw new Error(
       `Network/CORS error fetching ${url}. ` +
+      `If the response is visible in DevTools but JS can't read it, the server is ` +
+      `likely missing an Access-Control-Allow-Origin header for this origin. ` +
       `(Original: ${err?.message || err})`
     );
   }

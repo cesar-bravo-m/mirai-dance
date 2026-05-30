@@ -7,5 +7,4 @@ dist/
 .env.*.local
 .vite/
 
-# Dev-only MediaPipe assets staged by scripts/copy-mediapipe-assets.mjs
 public/mediapipe/

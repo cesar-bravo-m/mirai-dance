@@ -7,7 +7,6 @@ dist
 *.log
 .vite
 
-# Dev-only MediaPipe assets; prod loads these from the Azure blob.
 public/mediapipe
 .claude
 Dockerfile

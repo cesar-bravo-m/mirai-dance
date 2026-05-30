@@ -26,6 +26,7 @@ export default function useMediaPipe(videoRef) {
         await video.play();
 
         setStatusMessage('Loading pose model...');
+
         const isLocalhost = ['localhost', '127.0.0.1', '[::1]', '::1']
           .includes(window.location.hostname);
         const wasmBase = isLocalhost

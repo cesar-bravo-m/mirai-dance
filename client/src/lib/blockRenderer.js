@@ -1,24 +1,24 @@
 const WHITE = '#ffffff';
 
 const LIMBS = [
-  // Shoulders
+
   [11, 12, 7, WHITE],
-  // Torso
+
   ['shoulder_mid', 'hip_mid', 7, WHITE],
-  // Hips
+
   [23, 24, 7, WHITE],
-  // Neck
+
   ['head', 'shoulder_mid', 5, WHITE],
-  // Left arm
+
   [11, 13, 6, WHITE],
   [13, 15, 5, WHITE],
-  // Right arm
+
   [12, 14, 6, WHITE],
   [14, 16, 5, WHITE],
-  // Left leg
+
   [23, 25, 7, WHITE],
   [25, 27, 6, WHITE],
-  // Right leg
+
   [24, 26, 7, WHITE],
   [26, 28, 6, WHITE],
 ];

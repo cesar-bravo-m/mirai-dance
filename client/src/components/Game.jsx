@@ -13,6 +13,7 @@ const BOX_GAP = 14;
 const CONV_GAP = 36;
 const THUMB_W = 180;
 const THUMB_H = 200;
+
 const THUMB_GAP = 56;
 const MAX_SCORE = 1_000_000;
 
@@ -185,6 +186,7 @@ export default function Game({ song, userLandmarks, cameraVideoRef, onExit }) {
   const [countdown, setCountdown] = useState(null);
   const [hud, setHud] = useState({ score: 0, accuracy: 0, time: '0:00', cal: 0 });
   const [judgment, setJudgment] = useState(null);
+
   const [streamReady, setStreamReady] = useState(false);
 
   const [showSkeleton, setShowSkeleton] = useState(false);
@@ -280,7 +282,7 @@ export default function Game({ song, userLandmarks, cameraVideoRef, onExit }) {
       );
       const next = (Number.isFinite(prev) ? prev : 0) + runCal;
       localStorage.setItem('mirai-dance.totalCalories', String(next));
-    } catch { /* localStorage unavailable */ }
+    } catch {  }
   }, []);
 
   useEffect(() => {
@@ -296,6 +298,7 @@ export default function Game({ song, userLandmarks, cameraVideoRef, onExit }) {
     const beatInterval = evalBeats.length >= 2
       ? evalBeats[1] - evalBeats[0]
       : (poseData?.bpm ? (4 * 60 / poseData.bpm) : 2);
+
 const VISIBILITY_THRESHOLD = 0.5;
 const HAND_LANDMARK_IDX = [15, 16];
 const LEG_LANDMARK_IDX = [25, 26, 27, 28];
@@ -353,6 +356,7 @@ function isOutOfFrame(landmarks) {
         octx.clearRect(0, 0, winW, winH);
 
         if (showSkeletonRef.current && video && video.videoWidth > 0 && video.videoHeight > 0) {
+
           const vw = video.videoWidth;
           const vh = video.videoHeight;
           const containerAR = winW / winH;
@@ -454,6 +458,7 @@ function isOutOfFrame(landmarks) {
           const barW = cw;
 
           ctx.save();
+
           ctx.fillStyle = 'rgba(255,255,255,0.08)';
           ctx.fillRect(barX, barY, barW, barH);
 
@@ -467,6 +472,7 @@ function isOutOfFrame(landmarks) {
       }
 
       if (phase !== 'playing') {
+
         lastDampTime = 0;
       }
       if (phase === 'playing') {
@@ -491,7 +497,9 @@ function isOutOfFrame(landmarks) {
 
         while (nextEvalIdx < evalBeats.length && currentTime >= evalBeats[nextEvalIdx]) {
           const s = scoreRef.current;
+
           const rawSim = dampedScoreRef.current;
+
           const outOfFrame = isOutOfFrame(userLandmarks.current?.[0]);
           const similarity = outOfFrame ? 0 : rawSim;
           const beatMax = N > 0 ? MAX_SCORE / N : 0;
@@ -546,6 +554,7 @@ function isOutOfFrame(landmarks) {
           const t = currentTime;
           const m = Math.floor(t / 60);
           const sec = Math.floor(t % 60);
+
           const elapsedMin = t / 60;
           const avgMatch = s.samples > 0 ? s.simTotal / s.samples : 0;
           const cal = Math.round(elapsedMin * 7 * (0.5 + 0.5 * avgMatch));
@@ -621,6 +630,7 @@ function isOutOfFrame(landmarks) {
           <div key={`j-${judgment.key}`} className={`judge-popup ${judgClass}`}>
             {judgment.label}
           </div>
+
           <div key={`b-${judgment.key}`} className="beat-flash" />
           {(judgment.golden || judgment.special) && (
             <div key={`f-${judgment.key}`} className={`screen-flash ${judgClass}`} />

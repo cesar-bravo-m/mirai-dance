@@ -26,6 +26,7 @@ function preloadAllAssets() {
 
 const MENU_MUSIC_VOLUME = 1.2;
 const MENU_MUSIC_FADE_MS = 280;
+
 const DISCLAIMER_ACCEPTED_KEY = "mirai-dance:disclaimer-accepted";
 
 export default function App() {
@@ -48,6 +49,7 @@ function DanceApp() {
     error: cameraError,
     statusMessage: cameraStatus,
   } = useMediaPipe(cameraVideoRef);
+
   const cameraPermission = useCameraPermission();
 
   const assetsRef = useRef(null);
@@ -71,6 +73,7 @@ function DanceApp() {
         if (!response) {
           response = await fetch(url, { credentials: 'omit' });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
           if (cache) cache.put(url, response.clone()).catch(() => {});
         }
         const blob = await response.blob();
@@ -101,6 +104,7 @@ function DanceApp() {
   const gainNodeRef = useRef(null);
 
   const [song, setSong] = useState(null);
+
   const [lastPlayedTitle, setLastPlayedTitle] = useState(null);
 
   const playMenuMusic = useCallback(() => {
@@ -118,14 +122,16 @@ function DanceApp() {
           fadeGain(ctx, gain, MENU_MUSIC_VOLUME, MENU_MUSIC_FADE_MS);
         }
       } else if (m.volume < 0.999) {
+
         fadeElementVolume(m, 1, MENU_MUSIC_FADE_MS);
       }
     }
 
     if (m.paused) {
+
       const p = m.play();
       if (p && typeof p.then === 'function') {
-        p.then(rampToTarget).catch(() => { /* autoplay blocked */ });
+        p.then(rampToTarget).catch(() => {  });
       } else {
         rampToTarget();
       }
@@ -154,7 +160,7 @@ function DanceApp() {
         if (!menuMusicStoppedRef.current && !m.paused) {
           fadeGain(ctx, gain, MENU_MUSIC_VOLUME, MENU_MUSIC_FADE_MS);
         }
-      } catch { /* createMediaElementSource */ }
+      } catch {  }
     }
     window.addEventListener('pointerdown', upgradeOnGesture, { capture: true, once: true });
     window.addEventListener('keydown', upgradeOnGesture, { capture: true, once: true });
@@ -177,7 +183,7 @@ function DanceApp() {
 
   useEffect(() => {
     playMenuMusic();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   const stopMenuMusic = useCallback(() => {
@@ -193,6 +199,7 @@ function DanceApp() {
       fadeElementVolume(m, 0, MENU_MUSIC_FADE_MS);
     }
     setTimeout(() => {
+
       m.pause();
     }, MENU_MUSIC_FADE_MS + 30);
   }, []);
@@ -229,6 +236,7 @@ function DanceApp() {
   }, [stopMenuMusic]);
   const handleExit = useCallback(() => {
     setSong(prev => {
+
       if (prev?.videoUrl?.startsWith('blob:')) URL.revokeObjectURL(prev.videoUrl);
       return null;
     });
@@ -239,9 +247,11 @@ function DanceApp() {
   const permissionDenied =
     cameraPermission === 'denied' ||
     (!!cameraError && /denied|NotAllowed|Permission/i.test(cameraError));
+
   const permissionPending =
     cameraPermission === 'prompt' ||
     (cameraPermission !== 'granted' && cameraStatus === 'Requesting camera...');
+
   const showPermissionGuard =
     !cameraReady &&
     cameraPermission !== 'granted' &&
@@ -249,6 +259,7 @@ function DanceApp() {
 
   return (
     <>
+
       {bgVideoUrl && (
         <video
           className="page-bg-video"
@@ -326,6 +337,7 @@ function Disclaimer({ onAccept }) {
         </a>
         <button type="button" className="disclaimer-accept" onClick={onAccept}>
           Let's Dance!
+
         </button>
       </div>
     </div>
@@ -399,6 +411,7 @@ function useCameraPermission() {
         };
       })
       .catch(() => {
+
       });
     return () => {
       cancelled = true;
@@ -418,6 +431,7 @@ function CameraPermissionGuard({ isDenied }) {
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
+
           <polygon
             points="100,10 30,90 70,90 70,230 130,230 130,90 170,90"
             fill="#00d2ff"
@@ -432,7 +446,7 @@ function CameraPermissionGuard({ isDenied }) {
         <h1 className="permission-title">Camera Access Required</h1>
         <p className="permission-body">
           MIRAI DANCE uses your webcam to track your dance moves. No video is
-          ever recorded or sent anywhere. Pose detection runs entirely in your
+          ever recorded or sent anywhere — pose detection runs entirely in your
           browser.
         </p>
         <p className="permission-cta">

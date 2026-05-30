@@ -1,15 +1,15 @@
 {
-    "background_animation": "https://miraidancevideos.blob.core.windows.net/demovideos/background_animation.mp4?sp=r&st=2026-05-23T22:45:25Z&se=2026-05-30T07:00:25Z&spr=https&sv=2026-02-06&sr=b&sig=eVEcLkhIg0F2zzL9Wp1GI%2B87g25nj2vz%2BJ9y1rpJ8%2Bs%3D",
+    "background_animation": "https://miraidancevideos.blob.core.windows.net/demovideos/background_animation.mp4?sp=r&st=2026-05-30T14:10:17Z&se=2026-06-06T22:25:17Z&spr=https&sv=2026-02-06&sr=b&sig=6Njv1XXoEDbedxZNX2C2ICCYGCxpDOjAdTpLVHz6EuE%3D",
     "sounds": {
-        "applause": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/applause.mp3?sp=r&st=2026-05-24T15:46:08Z&se=2026-05-31T00:01:08Z&spr=https&sv=2026-02-06&sr=b&sig=C%2B2D%2FvTolJB25BOg3GHplgh4BcODqOuDNzLvGABNw4Y%3D",
-        "menumusic": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/menumusic.mp3?sp=r&st=2026-05-24T15:46:23Z&se=2026-05-31T00:01:23Z&spr=https&sv=2026-02-06&sr=b&sig=OaSpB4YSrD%2FG3U47A%2BJVVfYN%2Bq401wTyUVLs3aZlbEI%3D",
-        "scratch_sound": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/scratch_sound.mp3?sp=r&st=2026-05-24T15:46:37Z&se=2026-05-31T00:01:37Z&spr=https&sv=2026-02-06&sr=b&sig=wSJv7DiV518GNBkiG0AFc63WatfBK%2FvzxHaWkIKnRv8%3D",
-        "song_selected": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/song_selected.mp3?sp=r&st=2026-05-24T15:46:49Z&se=2026-05-31T00:01:49Z&spr=https&sv=2026-02-06&sr=b&sig=NIAFiaibJwEyzuXdqzk8ceJUCsLiMjECvJfTWtVWEXA%3D",
-        "special": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/special.mp3?sp=r&st=2026-05-24T15:47:02Z&se=2026-05-31T00:02:02Z&spr=https&sv=2026-02-06&sr=b&sig=jUqOj%2F0ShPk0k0GkADirh47dtYbaGN2N0QZEsP9vCCg%3D"
+        "applause": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/applause.mp3?sp=r&st=2026-05-30T14:10:49Z&se=2026-06-06T22:25:49Z&spr=https&sv=2026-02-06&sr=b&sig=SXz3fOLSSrO9K9RVe8YAjViPkhuQJqnta6qdyV7easI%3D",
+        "menumusic": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/menumusic.mp3?sp=r&st=2026-05-30T14:11:02Z&se=2026-06-06T22:26:02Z&spr=https&sv=2026-02-06&sr=b&sig=UqEAqaxDscYIFhWRvAFBT6pMBVEKqN931rBrbnYtcns%3D",
+        "scratch_sound": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/scratch_sound.mp3?sp=r&st=2026-05-30T14:11:16Z&se=2026-06-06T22:26:16Z&spr=https&sv=2026-02-06&sr=b&sig=LpSz1fhQBP3WdkDszsf8nl6ZNv1P9IqMZzQcgmlJRNo%3D",
+        "song_selected": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/song_selected.mp3?sp=r&st=2026-05-30T14:11:27Z&se=2026-06-06T22:26:27Z&spr=https&sv=2026-02-06&sr=b&sig=rqOQXUXzC98Bhlu5Im6gb%2Bqfg9dAcSAuYIQH72kJ4Tk%3D",
+        "special": "https://miraidancevideos.blob.core.windows.net/demovideos/sounds/special.mp3?sp=r&st=2026-05-30T14:11:39Z&se=2026-06-06T22:26:39Z&spr=https&sv=2026-02-06&sr=b&sig=lkIeu08HXTSD%2FQ29sCkmoBvqpT9bpFR1zVn%2BbGdO4DQ%3D"
     },
     "logos": {
-        "jpop": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/jpop.png?sp=r&st=2026-05-24T15:47:52Z&se=2026-05-31T00:02:52Z&spr=https&sv=2026-02-06&sr=b&sig=ydvUIsjKr%2FbHBVyeqM9BOTPP9Is%2Bq5WBqtZxNpR90PI%3D",
-        "kpop": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/kpop.png?sp=r&st=2026-05-24T15:48:22Z&se=2026-05-31T00:03:22Z&spr=https&sv=2026-02-06&sr=b&sig=FO2u4WNuWf%2B3SlR8UEk025BlMvS3ca8v5MfRjeRRZAo%3D",
-        "metal": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/metal.png?sp=r&st=2026-05-24T15:48:37Z&se=2026-05-31T00:03:37Z&spr=https&sv=2026-02-06&sr=b&sig=QyFEqh8867Al1Kp54SGDqLMrv%2B%2Bjkj4K0dm1O0ndwA0%3D"
+        "jpop": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/jpop.png?sp=r&st=2026-05-30T14:12:07Z&se=2026-06-06T22:27:07Z&spr=https&sv=2026-02-06&sr=b&sig=fA5rRlHPDZ58FbXb7fvG2PjXooXTsehetztkIfuEBOc%3D",
+        "kpop": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/kpop.png?sp=r&st=2026-05-30T14:12:23Z&se=2026-06-06T22:27:23Z&spr=https&sv=2026-02-06&sr=b&sig=BXoVJQpwpBjI4%2Fa%2Fc0ta%2B1D%2FcjqluB1mQasgZ7oZxNw%3D",
+        "metal": "https://miraidancevideos.blob.core.windows.net/demovideos/logos/metal.png?sp=r&st=2026-05-30T14:12:38Z&se=2026-06-06T22:27:38Z&spr=https&sv=2026-02-06&sr=b&sig=3SfzeCDYb0He5UOutnfHWEWAf0EaNQaQQ7Ax7kNtAk4%3D"
     }
 }

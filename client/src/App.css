@@ -155,6 +155,7 @@ video, canvas, img { display: block; }
   z-index: 3;
   transition: background 0.2s ease;
 }
+
 .carousel-card:not(.carousel-card-center):hover .carousel-card-shade {
   background: linear-gradient(
     180deg,
@@ -184,6 +185,7 @@ video, canvas, img { display: block; }
   background: rgba(12, 14, 34, 0.72);
   border: 3px solid #2a2e55;
   color: #eaeaff;
+
   font-size: 0;
   display: flex;
   align-items: center;
@@ -191,6 +193,7 @@ video, canvas, img { display: block; }
   padding: 0;
   transition: background 0.15s, border-color 0.15s, color 0.15s, opacity 0.2s, transform 0.15s;
 }
+
 .carousel-arrow::before {
   content: '';
   display: block;
@@ -201,6 +204,7 @@ video, canvas, img { display: block; }
 }
 .carousel-arrow-left::before {
   border-right: 32px solid currentColor;
+
   margin-left: -8px;
 }
 .carousel-arrow-right::before {
@@ -307,6 +311,7 @@ video, canvas, img { display: block; }
   min-height: 108px;
 }
 .select-info-cell + .select-info-cell {
+
 }
 .select-info-cell-label {
   font-size: 0.65rem;
@@ -333,6 +338,7 @@ video, canvas, img { display: block; }
   display: block;
   width: 250px;
   height: 250px;
+
   animation: genre-logo-spin 4s linear infinite;
 }
 @keyframes genre-logo-spin {
@@ -343,7 +349,6 @@ video, canvas, img { display: block; }
   font-size: clamp(2.4rem, 4.5vw, 3.4rem);
   gap: 4px;
 }
-
 
 .select-bottom {
   text-align: center;
@@ -586,6 +591,7 @@ video, canvas, img { display: block; }
   flex-direction: column;
   align-items: flex-start;
 }
+
 .hud-group {
   display: flex;
   align-items: flex-start;
@@ -637,6 +643,7 @@ video, canvas, img { display: block; }
   background: #14162d;
   border: 2px solid #2a2e55;
   color: #eaeaff;
+
   font-size: 0;
   display: block;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
@@ -660,7 +667,6 @@ video, canvas, img { display: block; }
   border-color: #ffffff;
   color: #ffffff;
 }
-
 
 .judge-popup {
   position: fixed;
@@ -825,6 +831,7 @@ video, canvas, img { display: block; }
   color: #ffffff;
   box-shadow: none;
 }
+
 .modal-header {
   display: flex;
   align-items: center;
@@ -869,6 +876,7 @@ video, canvas, img { display: block; }
   letter-spacing: 1px;
   font-family: inherit;
 }
+
 .modal-close {
   position: absolute;
   top: 6px;
@@ -1384,12 +1392,6 @@ video, canvas, img { display: block; }
   line-height: 1.5;
 }
 
-/* ───── Dancer pick — image mode (replaces stick figures when the song
-   provides Dancers URLs in songs.json) ─────────────────────────────────
-   Hover/focus turns ONE card into the spotlit "stage" version: bigger,
-   slight tilt, with a warm radial gradient anchored to the bottom that
-   reads as stage lights illuminating the character from below. The other
-   cards shrink back. Inspired by the 13 Sentinels character-select panel. */
 .dancer-grid {
   perspective: 1200px;
 }
@@ -1427,9 +1429,6 @@ video, canvas, img { display: block; }
   pointer-events: none;
 }
 
-/* The stage-light bloom: ellipse anchored to the bottom-center of the card,
-   wider than tall, fading upward. Off by default, fades in on hover/focus.
-   Two layers — a soft tall wash for "uplight" + a sharp ground halo. */
 .dancer-pick-lights {
   position: absolute;
   inset: 0;
@@ -1438,14 +1437,14 @@ video, canvas, img { display: block; }
   opacity: 0;
   transition: opacity 0.3s ease;
   background:
-    /* tight floor halo at the dancer's feet */
+
     radial-gradient(
       ellipse 60% 8% at 50% 92%,
       rgba(255, 215, 110, 0.85) 0%,
       rgba(255, 215, 110, 0.4) 45%,
       rgba(255, 215, 110, 0) 100%
     ),
-    /* taller "uplight" wash that fades upward */
+
     radial-gradient(
       ellipse 90% 70% at 50% 100%,
       rgba(255, 200, 90, 0.55) 0%,
@@ -1455,18 +1454,12 @@ video, canvas, img { display: block; }
     );
 }
 
-/* When ANY image-mode card in the grid is hovered, dim & shrink the OTHER
-   cards (not the hovered one — :not(:hover) excludes it so the dedicated
-   scale-up rule below wins for the focused pick). Without :not() the
-   :has() selector's higher specificity was beating the up rule and every
-   card was getting shrunk together. */
 .dancer-grid:has(.dancer-pick-card-image:hover) .dancer-pick-card-image:not(:hover),
 .dancer-grid:has(.dancer-pick-card-image:focus-visible) .dancer-pick-card-image:not(:focus-visible) {
   transform: scale(0.78);
   opacity: 0.5;
 }
 
-/* The hovered/focused card itself: scale up, tilt a touch, light it up. */
 .dancer-grid .dancer-pick-card-image:hover,
 .dancer-grid .dancer-pick-card-image:focus-visible {
   transform: scale(1.2) rotate(-2.5deg);
@@ -1481,7 +1474,6 @@ video, canvas, img { display: block; }
   filter: brightness(1.06) saturate(1.05) drop-shadow(0 6px 14px rgba(255, 180, 70, 0.55));
 }
 
-/* ───── HUD: burnt-calorie estimate next to the score ─────────────── */
 .hud-cal { align-items: flex-end; }
 .hud-cal-val {
   font-size: 2rem;
@@ -1501,7 +1493,6 @@ video, canvas, img { display: block; }
   text-transform: uppercase;
 }
 
-/* ───── Song select: lifetime burnt-calorie readout (bottom-left) ─── */
 .select-calorie-readout {
   position: absolute;
   bottom: 22px;
@@ -1534,9 +1525,6 @@ video, canvas, img { display: block; }
   text-transform: uppercase;
 }
 
-/* Subtle per-beat rim flash — fires every time a conveyor pose lands in
-   the target box, rhythmic pulse for the player. Quieter than the
-   .screen-flash bonus border (thinner, faster fade, lower opacity). */
 .beat-flash {
   position: fixed;
   inset: 0;

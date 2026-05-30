@@ -1,12 +1,12 @@
 export const DEFAULT_SEGMENTS = [
-  // TODO: Legs are not scored!!! This is temporary until I figure out a solution
+
   { from: 11, to: 13, weight: 1 },
   { from: 13, to: 15, weight: 1 },
   { from: 12, to: 14, weight: 1 },
   { from: 14, to: 16, weight: 1 },
 ];
 
-export const DEFAULT_TOLERANCE = 200; // degrees
+export const DEFAULT_TOLERANCE = 200;
 
 function limbAngle(landmarks, a, b) {
   return Math.atan2(landmarks[b].y - landmarks[a].y, landmarks[b].x - landmarks[a].x);
@@ -43,7 +43,7 @@ export function comparePoses(detected, reference, options = {}) {
     limbs.push({
       from: seg.from,
       to: seg.to,
-      diff: diff * 180 / Math.PI, // degrees
+      diff: diff * 180 / Math.PI,
       score: limbScore,
     });
   }
