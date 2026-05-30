@@ -3,12 +3,11 @@ import SongSelect from './components/SongSelect';
 import Game from './components/Game';
 import useMediaPipe from './hooks/useMediaPipe';
 import { initBlockRenderer } from './lib/blockRenderer';
-import SONGS from './songs.json';
-import REMOTE_ASSETS from './remote_assets.json';
+import { loadAssets, getAssets } from './assets';
 
-function preloadAllAssets() {
+function preloadAllAssets(songs) {
   const assets = {};
-  for (const [title, urls] of Object.entries(SONGS)) {
+  for (const [title, urls] of Object.entries(songs)) {
     const img = new Image();
     img.src = urls.Cover;
 
@@ -33,15 +32,34 @@ export default function App() {
   const [accepted, setAccepted] = useState(
     () => localStorage.getItem(DISCLAIMER_ACCEPTED_KEY) === "true"
   );
+
+  const [assetsReady, setAssetsReady] = useState(false);
+  const [assetsError, setAssetsError] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    loadAssets()
+      .then(() => { if (!cancelled) setAssetsReady(true); })
+      .catch((err) => { if (!cancelled) setAssetsError(err.message || String(err)); });
+    return () => { cancelled = true; };
+  }, []);
+
   const handleAccept = () => {
     localStorage.setItem(DISCLAIMER_ACCEPTED_KEY, "true");
     setAccepted(true);
   };
   if (!accepted) return <Disclaimer onAccept={handleAccept} />;
+  if (assetsError) {
+    return <AppError title="Couldn't load assets" message={assetsError} hint="Check your connection and reload the page." />;
+  }
+  if (!assetsReady) return <AppLoader status="Loading…" />;
   return <DanceApp />;
 }
 
 function DanceApp() {
+
+  const REMOTE_ASSETS = getAssets();
+  const SONGS = REMOTE_ASSETS.songs;
+
   const cameraVideoRef = useRef(null);
   const {
     landmarksRef: userLandmarks,
@@ -54,7 +72,7 @@ function DanceApp() {
 
   const assetsRef = useRef(null);
   if (assetsRef.current === null) {
-    assetsRef.current = preloadAllAssets();
+    assetsRef.current = preloadAllAssets(SONGS);
   }
 
   useEffect(() => { initBlockRenderer(); }, []);
@@ -378,17 +396,19 @@ function fadeElementVolume(audio, target, durationMs) {
   audio.__fadeRaf = requestAnimationFrame(tick);
 }
 
-function AppError({ message }) {
+function AppError({
+  message,
+  title = 'Camera not available',
+  hint = 'Allow camera access in your browser and reload the page.',
+}) {
   return (
     <div className="app-loader-screen">
       <div className="app-loader-card app-loader-card-error">
         <h1 className="logo app-loader-logo">MIRAI<span className="logo-accent">DANCE</span></h1>
         <div className="app-loader-error-badge">!</div>
-        <div className="app-loader-status">Camera not available</div>
+        <div className="app-loader-status">{title}</div>
         <div className="app-loader-error">{message}</div>
-        <div className="app-loader-hint">
-          Allow camera access in your browser and reload the page.
-        </div>
+        <div className="app-loader-hint">{hint}</div>
       </div>
     </div>
   );

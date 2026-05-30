@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import SONGS from '../songs.json';
-import REMOTE_ASSETS from '../remote_assets.json';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { getAssets } from '../assets';
 import { renderBlockCharacter } from '../lib/blockRenderer';
 
 const ARTIST_FONTS = [
@@ -14,25 +13,25 @@ const ARTIST_FONTS = [
   '"Copperplate", "Copperplate Gothic Bold", serif',
 ];
 
-const SONG_ENTRIES = Object.entries(SONGS).map(([title, urls]) => {
-  const dashIdx = title.indexOf(' - ');
-  const songName = dashIdx >= 0 ? title.slice(dashIdx + 3) : title;
-  return {
-    title,
-    songName,
-    cover: urls.Cover,
-    video: urls.Video,
-    data: urls.Data,
-    sample: urls.AudioSample,
-    genre: urls.Genre,
-    artist: urls.Artist,
-    difficulty: urls.Difficulty,
+function buildSongEntries(songs) {
+  return Object.entries(songs).map(([title, urls]) => {
+    const dashIdx = title.indexOf(' - ');
+    const songName = dashIdx >= 0 ? title.slice(dashIdx + 3) : title;
+    return {
+      title,
+      songName,
+      cover: urls.Cover,
+      video: urls.Video,
+      data: urls.Data,
+      sample: urls.AudioSample,
+      genre: urls.Genre,
+      artist: urls.Artist,
+      difficulty: urls.Difficulty,
 
-    dancerImages: urls.Dancers,
-  };
-});
-
-const SONG_COUNT = SONG_ENTRIES.length;
+      dancerImages: urls.Dancers,
+    };
+  });
+}
 
 const SAMPLE_VOLUME = 0.7;
 const FADE_MS = 220;
@@ -46,12 +45,8 @@ function wrapOffset(from, to, n) {
   return raw > n / 2 ? raw - n : raw;
 }
 
-const songSelectedSfx = new Audio(REMOTE_ASSETS.sounds.song_selected);
-songSelectedSfx.preload = 'auto';
-const scratchSfx = new Audio(REMOTE_ASSETS.sounds.scratch_sound);
-scratchSfx.preload = 'auto';
-
 function playSfx(audio) {
+  if (!audio) return;
   try {
     audio.currentTime = 0;
     audio.play().catch(() => {});
@@ -59,6 +54,28 @@ function playSfx(audio) {
 }
 
 export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialTitle }) {
+
+  const SONG_ENTRIES = useMemo(() => buildSongEntries(getAssets().songs), []);
+  const SONG_COUNT = SONG_ENTRIES.length;
+
+  const songSelectedSfxRef = useRef(null);
+  const scratchSfxRef = useRef(null);
+  if (songSelectedSfxRef.current === null) {
+    const { sounds } = getAssets();
+    const selected = new Audio(sounds.song_selected);
+    selected.preload = 'auto';
+    songSelectedSfxRef.current = selected;
+    const scratch = new Audio(sounds.scratch_sound);
+    scratch.preload = 'auto';
+    scratchSfxRef.current = scratch;
+  }
+
+  useEffect(() => {
+    Object.values(getAssets().logos).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const [selectedIndex, setSelectedIndex] = useState(() => {
     if (initialTitle) {
@@ -198,7 +215,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
   async function handleSelect(song) {
     if (inFlow) return;
     onMenuMusicStop?.();
-    playSfx(songSelectedSfx);
+    playSfx(songSelectedSfxRef.current);
     setFetchingTitle(song.title);
 
     abortRef.current = new AbortController();
@@ -238,7 +255,7 @@ export default function SongSelect({ assets, onSelect, onMenuMusicStop, initialT
         await sleepAbortable(MIN_LOAD_DURATION_MS - elapsed, signal);
       }
 
-      playSfx(scratchSfx);
+      playSfx(scratchSfxRef.current);
 
       onSelect({
         title: song.title,
@@ -418,17 +435,9 @@ function DifficultyStars({ level }) {
   );
 }
 
-const GENRE_LOGOS = REMOTE_ASSETS.logos;
-
-if (typeof window !== 'undefined') {
-  Object.values(GENRE_LOGOS).forEach((src) => {
-    const img = new Image();
-    img.src = src;
-  });
-}
 function GenreLogo({ genre }) {
   const slug = genre.toLowerCase().replace(/\s+/g, '');
-  const src = GENRE_LOGOS[slug];
+  const src = getAssets().logos[slug];
   if (!src) return <>{genre}</>;
 
   return (

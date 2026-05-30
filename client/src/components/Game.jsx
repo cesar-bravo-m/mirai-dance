@@ -3,7 +3,7 @@ import usePosePlayback from '../hooks/usePosePlayback';
 import { comparePoses } from '../lib/comparison';
 import { drawSkeleton } from '../lib/drawing';
 import { renderBlockCharacter } from '../lib/blockRenderer';
-import REMOTE_ASSETS from '../remote_assets.json';
+import { getAssets } from '../assets';
 
 const BAR_H = 240;
 const BOX_W = 200;
@@ -203,8 +203,9 @@ export default function Game({ song, userLandmarks, cameraVideoRef, onExit }) {
   const applauseSfxRef = useRef(null);
 
   useEffect(() => {
-    specialSfxRef.current = new Audio(REMOTE_ASSETS.sounds.special);
-    applauseSfxRef.current = new Audio(REMOTE_ASSETS.sounds.applause);
+    const { sounds } = getAssets();
+    specialSfxRef.current = new Audio(sounds.special);
+    applauseSfxRef.current = new Audio(sounds.applause);
     specialSfxRef.current.preload = 'auto';
     applauseSfxRef.current.preload = 'auto';
   }, []);

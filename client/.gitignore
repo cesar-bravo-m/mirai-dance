@@ -8,3 +8,5 @@ dist/
 .vite/
 
 public/mediapipe/
+
+src/assets.json
